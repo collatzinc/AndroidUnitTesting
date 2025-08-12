@@ -48,6 +48,9 @@ class ProfileViewModel @Inject constructor(
     }
 
     private fun loadUserDetails() = viewModelScope.launch {
+        updateProfileState {
+            it.copy(isLoading = true)
+        }
         getUserDetailsUseCase(
         ).onEach { apiState ->
             when (apiState) {
@@ -55,7 +58,7 @@ class ProfileViewModel @Inject constructor(
                     val data = apiState.data
                     data?.let { mData ->
                         updateProfileState {
-                            it.copy(userUiData = userDataToUiMapper.map(mData))
+                            it.copy(isLoading = false, userUiData = userDataToUiMapper.map(mData))
                         }
                     }
 

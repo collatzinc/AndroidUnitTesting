@@ -16,5 +16,5 @@ abstract class LocalModule {
 
     @Binds
     @Singleton
-    abstract fun providesLocalData(authLocalDataSource: AuthLocalDataSource): LocalData
+    abstract fun bindsAuthLocalDataSource(localData: LocalData): AuthLocalDataSource
 }

@@ -177,7 +177,7 @@ fun Login(
                 Spacer(modifier = Modifier.height(24.dp))
 
                 Button(
-                    onClick = { /* Handle login */ },
+                    onClick = { onEvent(LoginUiEvent.ClickOnLogin) },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(50.dp),

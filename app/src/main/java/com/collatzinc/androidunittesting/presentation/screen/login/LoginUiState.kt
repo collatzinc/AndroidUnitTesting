@@ -7,10 +7,10 @@ sealed interface LoginUiState {
 
     data class Initial(
 
-        val username: String = "",
+        val username: String = "emilys",
         @StringRes val usernameError: Int? = null,
 
-        val password: String = "",
+        val password: String = "emilyspass",
         @StringRes val passwordError: Int? = null,
         val isPasswordVisible: Boolean = false,
 

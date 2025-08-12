@@ -14,6 +14,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.view.WindowInsetsControllerCompat
 import com.collatzinc.androidunittesting.presentation.screen.login.LoginScreen
 import com.collatzinc.androidunittesting.presentation.screen.login.LoginViewModel
 import com.collatzinc.androidunittesting.presentation.screen.profile.ProfileScreen
@@ -32,28 +33,27 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = false
         setContent {
             AndroidUnitTestingTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    val isLoggedIn by mainViewmodel.isLoggedIn.collectAsState()
+                val isLoggedIn by mainViewmodel.isLoggedIn.collectAsState()
 
-                    if (isLoggedIn) {
-                        ProfileScreen(
-                            modifier = Modifier.padding(innerPadding),
-                            profileViewModel = profileViewModel,
-                            logout = {
-                                mainViewmodel.onEvent(MainUiEvent.Logout)
-                            }
-                        )
-                    } else {
-                        LoginScreen(
-                            modifier = Modifier.padding(innerPadding),
-                            loginViewModel = loginViewModel,
-                            goToProfile = {
-                                mainViewmodel.onEvent(MainUiEvent.GotoProfile)
-                            }
-                        )
-                    }
+                if (isLoggedIn) {
+                    ProfileScreen(
+                        modifier = Modifier,
+                        profileViewModel = profileViewModel,
+                        logout = {
+                            mainViewmodel.onEvent(MainUiEvent.Logout)
+                        }
+                    )
+                } else {
+                    LoginScreen(
+                        modifier = Modifier,
+                        loginViewModel = loginViewModel,
+                        goToProfile = {
+                            mainViewmodel.onEvent(MainUiEvent.GotoProfile)
+                        }
+                    )
                 }
             }
         }

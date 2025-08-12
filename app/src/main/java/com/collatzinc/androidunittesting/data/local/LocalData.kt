@@ -6,7 +6,7 @@ import androidx.core.content.edit
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
-class LocalData @Inject constructor(@ApplicationContext private val context: Context):
+class LocalData @Inject constructor(@param:ApplicationContext private val context: Context):
     AuthLocalDataSource {
 
     companion object{

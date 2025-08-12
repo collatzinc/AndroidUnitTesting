@@ -2,6 +2,7 @@ package com.collatzinc.androidunittesting.presentation.screen.profile
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -42,6 +43,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
 import com.collatzinc.androidunittesting.R
@@ -51,7 +53,11 @@ import com.collatzinc.tokenrefreshapp.ui.screen.common.FullScreenLoading
 
 
 @Composable
-fun ProfileScreen(modifier: Modifier = Modifier, profileViewModel: ProfileViewModel, logout: ()->Unit) {
+fun ProfileScreen(
+    modifier: Modifier = Modifier,
+    profileViewModel: ProfileViewModel,
+    logout: () -> Unit
+) {
 
     val uiState = profileViewModel.profileUiState.collectAsStateWithLifecycle()
 
@@ -76,34 +82,28 @@ fun ProfileScreen(modifier: Modifier = Modifier, profileViewModel: ProfileViewMo
 }
 
 @Composable
-fun Profile(modifier: Modifier = Modifier, user: UserUiData,  logout: ()->Unit) {
-    Box(
+fun Profile(modifier: Modifier = Modifier, user: UserUiData, logout: () -> Unit) {
+
+    Column(
         modifier = modifier
             .fillMaxSize()
-            .background(Color(0xFFF5F5F5))
+            .background(Color(0xFFF5F5F5)),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Column {
-            // Header gradient
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(220.dp)
-                    .background(
-                        brush = Brush.horizontalGradient(
-                            colors = listOf(Color(0xFF6A11CB), Color(0xFF2575FC))
-                        )
-                    )
-            )
-
-            Spacer(modifier = Modifier.height(80.dp)) // leave space for profile image
-        }
 
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .safeDrawingPadding(),
+                .fillMaxWidth()
+                .background(
+                    brush = Brush.horizontalGradient(
+                        colors = listOf(Color(0xFF6A11CB), Color(0xFF2575FC))
+                    )
+                )
+                .safeDrawingPadding()
+                .padding(20.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+
             // Profile Image
             AsyncImage(
                 model = user.image,
@@ -127,45 +127,52 @@ fun Profile(modifier: Modifier = Modifier, user: UserUiData,  logout: ()->Unit) 
 
             Text(
                 text = user.username ?: "",
-                style = MaterialTheme.typography.bodyMedium.copy(color = Color.White.copy(alpha = 0.7f))
+                style = MaterialTheme.typography.bodyMedium.copy(
+                    color = Color.White.copy(
+                        alpha = 0.7f
+                    )
+                )
             )
+        }
 
-            Spacer(modifier = Modifier.height(16.dp))
 
-            // Info Card
-            Card(
-                shape = RoundedCornerShape(16.dp),
-                elevation = CardDefaults.cardElevation(6.dp),
-                modifier = Modifier
-                    .padding(16.dp)
-                    .fillMaxWidth()
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Info Card
+        Card(
+            shape = RoundedCornerShape(16.dp),
+            elevation = CardDefaults.cardElevation(6.dp),
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth()
+        ) {
+            Column(
+                modifier = Modifier.padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                Column(
-                    modifier = Modifier.padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    ProfileInfoRow(Icons.Default.Email, "Email", user.email)
-                    ProfileInfoRow(Icons.Default.Phone, "Phone", user.phone)
-                    ProfileInfoRow(Icons.Default.Person, "Gender", user.gender)
-                    ProfileInfoRow(Icons.Default.Cake, "Birth Date", user.birthDate)
-                    ProfileInfoRow(Icons.Default.Bloodtype, "Blood Group", user.bloodGroup)
-                    ProfileInfoRow(Icons.Default.Numbers, "Age", user.age?.toString())
-                }
-            }
-
-            Spacer(modifier = Modifier.weight(1f))
-
-            Button(
-                onClick = { logout },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(50.dp),
-                shape = RoundedCornerShape(12.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2575FC))
-            ) {
-                Text(stringResource(R.string.logout), fontWeight = FontWeight.Bold, color = Color.White)
+                ProfileInfoRow(Icons.Default.Email, "Email", user.email)
+                ProfileInfoRow(Icons.Default.Phone, "Phone", user.phone)
+                ProfileInfoRow(Icons.Default.Person, "Gender", user.gender)
+                ProfileInfoRow(Icons.Default.Cake, "Birth Date", user.birthDate)
+                ProfileInfoRow(Icons.Default.Bloodtype, "Blood Group", user.bloodGroup)
+                ProfileInfoRow(Icons.Default.Numbers, "Age", user.age?.toString())
             }
         }
+
+        Spacer(modifier = Modifier.weight(1f))
+
+        Text(
+            modifier = Modifier.clickable(onClick = {
+                logout()
+            }),
+            text = stringResource(R.string.logout),
+            fontWeight = FontWeight.Bold,
+            fontSize = 20.sp,
+            color = Color.Black
+        )
+
+        Spacer(modifier = Modifier.height(20.dp))
+
     }
 }
 
