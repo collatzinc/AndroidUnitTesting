@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">AndroidUnitTesting</string>
+    <string name="user_is_required_for_login">Please enter Username</string>
+    <string name="email_is_required_for_login">Please enter Email</string>
+    <string name="please_enter_valid_email">Please enter valid email</string>
+    <string name="please_enter_password">Please enter Password</string>
+    <string name="password_minimum_characters_validation">Please enter minimum 8 Characters</string>
+    <string name="your_password_cannot_start_or_end_with_a_blank_space">Your password cannot start or end with a blank space</string>
+    <string name="network_error">Network Error</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="username">Username\n</string>
+    <string name="password">Password</string>
+    <string name="logout">Logout\n</string>
 </resources>

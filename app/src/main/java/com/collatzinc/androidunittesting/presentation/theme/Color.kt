@@ -1,4 +1,4 @@
-package com.collatzinc.androidunittesting.ui.theme
+package com.collatzinc.androidunittesting.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
