@@ -306,7 +306,7 @@ class LoginViewModelTest {
         viewModel.loginUiState.test {
 
             //skip initial + UserNameChanged + PasswordChanged
-            skipItems(4)
+            skipItems(3)
 
             // Trigger ClickOnLogin event
             viewModel.onEvent(LoginUiEvent.ClickOnLogin)
