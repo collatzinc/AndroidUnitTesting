@@ -7,5 +7,6 @@ sealed class LoginUiEvent {
 
     data object ClickOnLogin : LoginUiEvent()
     data object ClickOnKeyboardNext : LoginUiEvent()
+    data object ClickOnKeyboardDone : LoginUiEvent()
     data object DismissApiError : LoginUiEvent()
 }

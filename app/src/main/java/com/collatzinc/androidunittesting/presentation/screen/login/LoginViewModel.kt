@@ -59,6 +59,12 @@ class LoginViewModel @Inject constructor(
                 areInputsValid()
             }
 
+            LoginUiEvent.ClickOnKeyboardDone -> {
+                if (areInputsValid()) {
+                    login()
+                }
+            }
+
             LoginUiEvent.ClickOnLogin -> {
                 if (areInputsValid()) {
                     login()
@@ -119,8 +125,6 @@ class LoginViewModel @Inject constructor(
         ).onEach { apiState ->
             when (apiState) {
                 is ResponseState.Success -> {
-                    val data = apiState.data
-                    Log.d("tag", data.toString())
                     _loginUiState.value = LoginUiState.LoggedIn
                 }
 

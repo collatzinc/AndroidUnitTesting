@@ -24,7 +24,7 @@ class AuthRepositoryImpl @Inject constructor(
             errorMapper = errorMapper,
             onSuccess = { dto ->
                 localDataSource.setAccessToken(dto?.accessToken)
-                localDataSource.setAccessToken(dto?.refreshToken)
+                localDataSource.setRefreshToken(dto?.refreshToken)
                 dto?.let { loginDTOToDomainMapper.map(dto) }
             }
         )

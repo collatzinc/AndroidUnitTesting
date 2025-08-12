@@ -156,7 +156,7 @@ fun Login(
                     maxLine = 1,
                     isPasswordField = uiState.isPasswordVisible.not(),
                     keyboardType = KeyboardType.Password,
-                    imeAction = ImeAction.Next,
+                    imeAction = ImeAction.Done,
                     trailingIconRes = if (uiState.isPasswordVisible)
                         R.drawable.ic_eye_on
                     else
@@ -169,7 +169,7 @@ fun Login(
                         onEvent(LoginUiEvent.PasswordChanged(it))
                     },
                     onNext = {
-                        onEvent(LoginUiEvent.ClickOnKeyboardNext)
+                        onEvent(LoginUiEvent.ClickOnKeyboardDone)
                     }
 
                 )
